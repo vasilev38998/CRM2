@@ -1,0 +1,13 @@
+<%- include('../partials/header', { title: 'Регистрация' }) %>
+<h2>Регистрация</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<form action="/register" method="post">
+  <label>Имя</label>
+  <input name="name" required />
+  <label>Email</label>
+  <input name="email" type="email" required />
+  <label>Пароль</label>
+  <input name="password" type="password" required />
+  <button type="submit">Создать аккаунт</button>
+</form>
+<%- include('../partials/footer') %>

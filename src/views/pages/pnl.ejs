@@ -1,0 +1,35 @@
+<%- include('../partials/header', { title: 'P&L' }) %>
+<h2>P&L отчёт</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Выручка</th>
+      <td><%= analytics.revenue.toFixed(2) %> ₽</td>
+    </tr>
+    <tr>
+      <th>Себестоимость (COGS)</th>
+      <td><%= analytics.cogs.toFixed(2) %> ₽</td>
+    </tr>
+    <tr>
+      <th>Валовая прибыль</th>
+      <td><%= analytics.grossProfit.toFixed(2) %> ₽</td>
+    </tr>
+    <tr>
+      <th>Валовая маржа</th>
+      <td><%= analytics.grossMargin.toFixed(2) %> %</td>
+    </tr>
+    <tr>
+      <th>Операционные расходы</th>
+      <td><%= analytics.operatingExpenses.toFixed(2) %> ₽</td>
+    </tr>
+    <tr>
+      <th>Чистая прибыль</th>
+      <td><%= analytics.netProfit.toFixed(2) %> ₽</td>
+    </tr>
+    <tr>
+      <th>Рентабельность продаж</th>
+      <td><%= analytics.profitability.toFixed(2) %> %</td>
+    </tr>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

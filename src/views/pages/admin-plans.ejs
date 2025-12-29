@@ -1,0 +1,42 @@
+<%- include('../partials/header', { title: 'Админка тарифов' }) %>
+<h2>Управление тарифами</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<form action="/admin/plans" method="post">
+  <label>Название</label>
+  <input name="name" required />
+  <label>Цена, ₽</label>
+  <input name="price_rub" type="number" required />
+  <label>Длительность, дней</label>
+  <input name="duration_days" type="number" required />
+  <label>Описание</label>
+  <textarea name="description"></textarea>
+  <button type="submit">Добавить тариф</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Цена</th>
+      <th>Длительность</th>
+      <th>Активен</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% plans.forEach(plan => { %>
+      <tr>
+        <td><%= plan.name %></td>
+        <td><%= plan.price_rub %> ₽</td>
+        <td><%= plan.duration_days %> дней</td>
+        <td><%= plan.is_active ? 'Да' : 'Нет' %></td>
+        <td>
+          <form action="/admin/plans/<%= plan.id %>/toggle" method="post">
+            <button type="submit" class="secondary">Переключить</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

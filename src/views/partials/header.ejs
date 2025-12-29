@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header>
+  <div>
+    <strong>Coffee Analytics</strong>
+  </div>
+  <nav>
+    <a href="/">Landing</a>
+    <% if (user) { %>
+      <a href="/dashboard">Дашборд</a>
+      <a href="/shops">Кофейни</a>
+      <a href="/products">Напитки и рецепты</a>
+      <a href="/ingredients">Ингредиенты</a>
+      <a href="/sales">Продажи</a>
+      <a href="/expenses">Расходы</a>
+      <a href="/pnl">P&L</a>
+      <a href="/subscription">Подписка</a>
+      <% if (user.is_admin) { %>
+        <a href="/admin/plans">Админка тарифов</a>
+      <% } %>
+      <a href="/logout">Выход</a>
+    <% } else { %>
+      <a href="/login">Вход</a>
+      <a href="/register">Регистрация</a>
+    <% } %>
+  </nav>
+  <% if (currentShop) { %>
+    <div>Текущая кофейня: <strong><%= currentShop.name %></strong></div>
+  <% } %>
+</header>
+<div class="container">

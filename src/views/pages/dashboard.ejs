@@ -1,0 +1,65 @@
+<%- include('../partials/header', { title: 'Дашборд' }) %>
+<h2>Дашборд</h2>
+<div class="grid grid-3">
+  <div class="card">
+    <h4>Выручка</h4>
+    <p><%= analytics.revenue.toFixed(2) %> ₽</p>
+  </div>
+  <div class="card">
+    <h4>Себестоимость (COGS)</h4>
+    <p><%= analytics.cogs.toFixed(2) %> ₽</p>
+  </div>
+  <div class="card">
+    <h4>Валовая прибыль</h4>
+    <p><%= analytics.grossProfit.toFixed(2) %> ₽</p>
+  </div>
+  <div class="card">
+    <h4>Валовая маржа</h4>
+    <p><%= analytics.grossMargin.toFixed(2) %> %</p>
+  </div>
+  <div class="card">
+    <h4>Операционные расходы</h4>
+    <p><%= analytics.operatingExpenses.toFixed(2) %> ₽</p>
+  </div>
+  <div class="card">
+    <h4>Чистая прибыль</h4>
+    <p><%= analytics.netProfit.toFixed(2) %> ₽</p>
+  </div>
+  <div class="card">
+    <h4>Рентабельность продаж</h4>
+    <p><%= analytics.profitability.toFixed(2) %> %</p>
+  </div>
+  <div class="card">
+    <h4>Точка безубыточности (доля)</h4>
+    <p><%= analytics.breakEvenPoint.toFixed(2) %> %</p>
+  </div>
+  <div class="card">
+    <h4>Точка безубыточности (выручка)</h4>
+    <p><%= analytics.breakEvenRevenue.toFixed(2) %> ₽</p>
+  </div>
+</div>
+
+<h3>Маржинальность по напиткам</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Напиток</th>
+      <th>Выручка</th>
+      <th>Себестоимость</th>
+      <th>Валовая прибыль</th>
+      <th>Маржа %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% analytics.productMargins.forEach(item => { %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.revenue.toFixed(2) %> ₽</td>
+        <td><%= item.cogs.toFixed(2) %> ₽</td>
+        <td><%= item.grossProfit.toFixed(2) %> ₽</td>
+        <td><%= item.margin.toFixed(2) %> %</td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>
