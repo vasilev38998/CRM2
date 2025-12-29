@@ -1,0 +1,30 @@
+<%- include('../partials/header', { title: 'Кофейни' }) %>
+<h2>Ваши кофейни</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<form action="/shops" method="post">
+  <label>Название кофейни</label>
+  <input name="name" required />
+  <button type="submit">Создать</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% shops.forEach(shop => { %>
+      <tr>
+        <td><%= shop.name %></td>
+        <td>
+          <form action="/shops/<%= shop.id %>/select" method="post">
+            <button type="submit" class="secondary">Выбрать</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title: 'Предпросмотр CSV' }) %>
+<h2>Предпросмотр CSV: <%= type %></h2>
+<table class="table">
+  <thead>
+    <tr>
+      <% if (rows.length) { %>
+        <% Object.keys(rows[0]).forEach(key => { %>
+          <th><%= key %></th>
+        <% }) %>
+      <% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% rows.forEach(row => { %>
+      <tr>
+        <% Object.keys(row).forEach(key => { %>
+          <td><%= row[key] %></td>
+        <% }) %>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<form action="<%= action %>" method="post">
+  <button type="submit">Подтвердить импорт</button>
+</form>
+<%- include('../partials/footer') %>

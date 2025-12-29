@@ -1,0 +1,44 @@
+<%- include('../partials/header', { title: 'Расходы' }) %>
+<h2>Расходы</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<form action="/expenses" method="post">
+  <label>Название</label>
+  <input name="name" required />
+  <label>Сумма, ₽</label>
+  <input name="amount" type="number" step="0.01" required />
+  <label>Категория</label>
+  <input name="category" required />
+  <label>Дата</label>
+  <input name="expense_at" type="date" required />
+  <button type="submit">Добавить расход</button>
+</form>
+
+<h3>CSV импорт расходов</h3>
+<p><a href="/expenses/template">Скачать шаблон CSV</a></p>
+<form action="/expenses/import" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv" required />
+  <button type="submit">Загрузить CSV</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Сумма</th>
+      <th>Категория</th>
+      <th>Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% expenses.forEach(expense => { %>
+      <tr>
+        <td><%= expense.name %></td>
+        <td><%= expense.amount %> ₽</td>
+        <td><%= expense.category %></td>
+        <td><%= new Date(expense.expense_at).toLocaleDateString('ru-RU') %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

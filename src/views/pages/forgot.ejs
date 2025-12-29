@@ -1,0 +1,9 @@
+<%- include('../partials/header', { title: 'Восстановление' }) %>
+<h2>Восстановление пароля</h2>
+<% if (message) { %><div class="notice"><%= message %></div><% } %>
+<form action="/forgot" method="post">
+  <label>Email</label>
+  <input name="email" type="email" required />
+  <button type="submit">Отправить токен</button>
+</form>
+<%- include('../partials/footer') %>

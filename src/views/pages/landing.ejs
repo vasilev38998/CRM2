@@ -1,0 +1,22 @@
+<%- include('../partials/header', { title: 'Coffee Analytics' }) %>
+<h1>Финансовая аналитика для кофеен</h1>
+<p>Учитывайте финансы, себестоимость, маржинальность и прибыль по каждой кофейне.</p>
+
+<div class="grid grid-3">
+  <% plans.forEach(plan => { %>
+    <div class="card">
+      <h3><%= plan.name %></h3>
+      <p><strong><%= plan.price_rub %> ₽</strong> / <%= plan.duration_days %> дней</p>
+      <p><%= plan.description %></p>
+      <% if (user) { %>
+        <form action="/subscription/create" method="post">
+          <input type="hidden" name="plan_id" value="<%= plan.id %>" />
+          <button type="submit">Оплатить</button>
+        </form>
+      <% } else { %>
+        <a href="/register">Начать</a>
+      <% } %>
+    </div>
+  <% }) %>
+</div>
+<%- include('../partials/footer') %>

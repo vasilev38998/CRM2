@@ -1,0 +1,48 @@
+<%- include('../partials/header', { title: 'Продажи' }) %>
+<h2>Продажи</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<form action="/sales" method="post">
+  <label>Напиток</label>
+  <select name="product_id">
+    <% products.forEach(product => { %>
+      <option value="<%= product.id %>"><%= product.name %></option>
+    <% }) %>
+  </select>
+  <label>Количество</label>
+  <input name="quantity" type="number" step="0.01" required />
+  <label>Цена, ₽</label>
+  <input name="price" type="number" step="0.01" required />
+  <label>Дата</label>
+  <input name="sold_at" type="date" required />
+  <button type="submit">Добавить продажу</button>
+</form>
+
+<h3>CSV импорт продаж</h3>
+<p><a href="/sales/template">Скачать шаблон CSV</a></p>
+<form action="/sales/import" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv" required />
+  <button type="submit">Загрузить CSV</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Напиток</th>
+      <th>Количество</th>
+      <th>Цена</th>
+      <th>Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% sales.forEach(sale => { %>
+      <tr>
+        <td><%= sale.product_name %></td>
+        <td><%= sale.quantity %></td>
+        <td><%= sale.price %> ₽</td>
+        <td><%= new Date(sale.sold_at).toLocaleDateString('ru-RU') %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

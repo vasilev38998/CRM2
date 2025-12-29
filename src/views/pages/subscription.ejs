@@ -1,0 +1,25 @@
+<%- include('../partials/header', { title: 'Подписка' }) %>
+<h2>Управление подпиской</h2>
+
+<% if (subscription) { %>
+  <div class="notice">
+    Текущая подписка активна до <%= new Date(subscription.end_at).toLocaleDateString('ru-RU') %>
+  </div>
+<% } else { %>
+  <div class="notice">Активной подписки нет.</div>
+<% } %>
+
+<h3>Выберите тариф</h3>
+<div class="grid grid-3">
+  <% plans.forEach(plan => { %>
+    <div class="card">
+      <h4><%= plan.name %></h4>
+      <p><%= plan.price_rub %> ₽ / <%= plan.duration_days %> дней</p>
+      <form action="/subscription/create" method="post">
+        <input type="hidden" name="plan_id" value="<%= plan.id %>" />
+        <button type="submit">Оплатить через СБП</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,11 @@
+<%- include('../partials/header', { title: 'Сброс пароля' }) %>
+<h2>Сброс пароля</h2>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<form action="/reset" method="post">
+  <label>Токен</label>
+  <input name="token" required value="<%= token %>" />
+  <label>Новый пароль</label>
+  <input name="password" type="password" required />
+  <button type="submit">Сменить пароль</button>
+</form>
+<%- include('../partials/footer') %>
